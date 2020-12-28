@@ -77,6 +77,11 @@ gdbserver.on('connection', (socket) => {
 
   gdbSocket = socket;
 
+  // Auto pause the simulation on connect
+  if (wokwiSocket) {
+    wokwiSocket.send(JSON.stringify({ cmd: 'pause' }));
+  }
+
   let buf = '';
   socket.on('data', (data) => {
     if (data[0] === 3) {
