@@ -19,9 +19,8 @@
 ## Connecting from GDB
 
 1. Install avr-gdb (`apt install gdb-avr` on Ubuntu). You can find a pre-built Windows binary inside [this package](http://downloads.arduino.cc/tools/avr-gcc-7.3.0-atmel3.6.1-arduino5-i686-w64-mingw32.zip).
-2. Pause the simulation on Wokwi.com (click on the pause button)
-3. Run `avr-gdb`
-4. Write: `target remote localhost:3555`
+2. Run `avr-gdb`
+3. Write: `target remote localhost:3555`
 
 That's it! You can now debug the simulated AVR code using GDB. Here are some quick commands to get you started:
 
