@@ -1,0 +1,23 @@
+{
+  "name": "wokwi-gdbserver",
+  "version": "1.0.0",
+  "description": "Wokwi GDBServer Bridge",
+  "main": "gdbserver.js",
+  "files": [
+    "gdbserver.js"
+  ],
+  "scripts": {
+    "start": "node gdbserver.js"
+  },
+  "keywords": [
+    "arduino",
+    "avr",
+    "gdb",
+    "wokwi"
+  ],
+  "author": "Uri Shaked",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^7.4.1"
+  }
+}
