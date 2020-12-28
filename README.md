@@ -32,6 +32,30 @@ That's it! You can now debug the simulated AVR code using GDB. Here are some qui
 - `disas $pc, $pc+16` - Disassemble the next few instructions
 - `info registers` - Dump all registers (r0-r31, SREG, SP, pc)
 
+## Debugging with Symbols
+
+If you want source-level debugging (with symbols and everything), first
+build an ELF file for your program locally (e.g. using the Arduino CLI).
+Then, push it to the simulator using GDB's `load` command, and load the
+symbols using the `symbol-file` command. Finally, set `$pc` to 0 and 
+start the program. Here's an example for such session:
+
+```
+(gdb) target remote localhost:3555
+Remote debugging using localhost:3555
+0x000001b6 in ?? ()
+(gdb) load blink.ino.elf
+Loading section .text, size 0x3a4 lma 0x0
+Start address 0x0, load size 932
+Transfer rate: 91 KB/sec, 932 bytes/write.
+(gdb) symbol-file blink.ino.elf
+Reading symbols from blink.ino.elf...done.
+(gdb) set $pc=0
+(gdb) stepi
+0x000000b8 in __init ()
+(gdb)
+```
+
 ## License
 
 Copyright (C) 2020 Uri Shaked. The code is released under the terms of the MIT license.
