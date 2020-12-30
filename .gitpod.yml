@@ -1,0 +1,13 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - init: npm install
+    command: npm run start
+  - command: avr-gdb
+
+ports:
+  - port: 2442
+    onOpen: open-preview
+  - port: 3555
+    onOpen: ignore

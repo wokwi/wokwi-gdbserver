@@ -2,6 +2,8 @@
 
 > Debug Arduino Code running in the Wowki Simulator using GDB
 
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/wokwi/wokwi-gdbserver)
+
 ## Install & Run
 
 1. Install [Node.js](https://nodejs.org/en/) version 12 or later. You can confirm your Node.js version by running: `node -v`.
