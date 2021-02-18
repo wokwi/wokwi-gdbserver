@@ -6,8 +6,9 @@
 
 const { createServer } = require('net');
 const WebSocket = require('ws');
-const https = require('https');
+const https = process.env.GITPOD_WORKSPACE_URL ? require('http') : require('https');
 const fs = require('fs');
+const indexHTML = fs.readFileSync('public/index.html', 'utf-8');
 
 const WS_PORT = 2442;
 const GDB_PORT = 3555;
@@ -23,8 +24,14 @@ const options = {
 
 const server = https
   .createServer(options, function (req, res) {
+    res.setHeader('content-type', 'text/html');
     res.writeHead(200);
-    res.end(`Wokwi gdbserver listening on local port ${GDB_PORT}.\n`);
+
+    const websocketUrl = process.env.GITPOD_WORKSPACE_URL
+      ? process.env.GITPOD_WORKSPACE_URL.replace('https://', `wss://${WS_PORT}-`)
+      : `wss://localhost:${WS_PORT}`;
+    const gdbUrl = process.env.GITPOD_WORKSPACE_URL.replace('https://', 'https://8080-');
+    res.end(indexHTML.replace('{WSS_URL}', websocketUrl).replace('{GDB_URL}', gdbUrl));
   })
   .listen(WS_PORT);
 

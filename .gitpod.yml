@@ -2,12 +2,15 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
+  - init: go get github.com/yudai/gotty
+    command: gotty -w avr-gdb -ex "target remote localhost:3555"
   - init: npm install
     command: npm run start
-  - command: avr-gdb
 
 ports:
   - port: 2442
     onOpen: open-preview
   - port: 3555
+    onOpen: ignore
+  - port: 8080
     onOpen: ignore
