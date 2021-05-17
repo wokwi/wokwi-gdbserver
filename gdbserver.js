@@ -76,6 +76,7 @@ gdbserver.on('connection', (socket) => {
   console.log('GDB connected\n');
 
   gdbSocket = socket;
+  socket.write('+');
 
   // Auto pause the simulation on connect
   if (wokwiSocket) {
