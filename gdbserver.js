@@ -6,8 +6,7 @@
 
 const { createServer } = require('net');
 const WebSocket = require('ws');
-const https = require('https');
-const fs = require('fs');
+const http = require('http');
 
 const WS_PORT = 2442;
 const GDB_PORT = 3555;
@@ -16,13 +15,8 @@ const DEBUG = false;
 const gdbserver = createServer();
 gdbserver.listen(GDB_PORT);
 
-const options = {
-  key: fs.readFileSync('ssl/key.pem'),
-  cert: fs.readFileSync('ssl/cert.pem'),
-};
-
-const server = https
-  .createServer(options, function (req, res) {
+const server = http
+  .createServer(function (req, res) {
     res.writeHead(200);
     res.end(`Wokwi gdbserver listening on local port ${GDB_PORT}.\n`);
   })

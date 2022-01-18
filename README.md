@@ -11,26 +11,28 @@
 
 ## Connecting from the Wokwi Simulator
 
-1. Open https://localhost:2442 and confirm the untrusted localhost SSL certificate (if you don't want to do this every time, [please follow these instructions](https://stackoverflow.com/questions/21397809/create-a-trusted-self-signed-ssl-cert-for-localhost-for-use-with-express-node)).
-2. Open any Arduino project on [wokwi.com](wokwi.com), e.g. [blink](https://wokwi.com/arduino/libraries/demo/blink), and start the simulation.
-3. In the code editor, press "F1" and select "Open Debug Web Socket".
-4. You'll see a prompt asking for a URL to connect to. Confirm the default URL.
+1. Open any Arduino project on [wokwi.com](wokwi.com), e.g. [blink](https://wokwi.com/arduino/libraries/demo/blink), and start the simulation.
+2. In the code editor, press "F1" and select "Open Debug Web Socket".
+3. You'll see a prompt asking for a URL to connect to. Confirm the default URL.
 
 ## Connecting from GDB
 
-1. Install avr-gdb (`apt install gdb-avr` on Ubuntu). You can find a pre-built Windows binary inside [this package](http://downloads.arduino.cc/tools/avr-gcc-7.3.0-atmel3.6.1-arduino5-i686-w64-mingw32.zip).
-2. Run `avr-gdb`
-3. Write: `target remote localhost:3555`
+You'll need to use a GDB build that works with the architecture you are debugging. For instance, debugging Arduino requires avr-gdb (`apt install gdb-avr` on Ubuntu). You can find a pre-built Windows binary inside [this package](http://downloads.arduino.cc/tools/avr-gcc-7.3.0-atmel3.6.1-arduino5-i686-w64-mingw32.zip).
 
-That's it! You can now debug the simulated AVR code using GDB. Here are some quick commands to get you started:
+1. Start gdb
+2. Write: `target remote localhost:3555`
+
+That's it! You can now debug the simulated code using GDB. Here are some quick commands to get you started:
 
 - `stepi` - Execute the next instruction
 - `c` - Continue running the program (press Ctrl+C to break)
 - `print $sp` - Prints the value of the Stack Pointer (SP)
 - `where` - Show stack trace
-- `set $r10 = 5` - Change the value of the R10 registers
+- `set $r10 = 5` - Change the value of the R10 register
 - `disas $pc, $pc+16` - Disassemble the next few instructions
 - `info registers` - Dump all registers (r0-r31, SREG, SP, pc)
+
+For more useful commands, check the [AVR GDB Cheatsheet](https://blog.wokwi.com/gdb-avr-arduino-cheatsheet/)
 
 ## Debugging with Symbols
 
