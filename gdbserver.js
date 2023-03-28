@@ -68,6 +68,7 @@ function gdbChecksum(text) {
 
 gdbserver.on('connection', (socket) => {
   console.log('GDB connected\n');
+  socket.setNoDelay(true);
 
   gdbSocket = socket;
   socket.write('+');
